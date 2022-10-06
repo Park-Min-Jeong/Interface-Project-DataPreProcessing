@@ -53,10 +53,11 @@
 - 중복된 정보이므로 제외
 * 2 raw_csv_region.py에서 수행
 
-2. period_df ⇒  Pct1.isnull() or Pct1=="60"
+2. period_df ⇒  Pcd1.isnull() or Pcd1=="60" or Pcd1=="00"
 - Pct1: 시대코드
 - isnull(): 결측값
 - "60": 시대미상
+- "00": 선사시대 이전
 * 5 filtering_data.py -- filtering(df) -- making_filter() -- filter_location_period()에서 수행
 
 3. location_df ⇒ longitude=="0" or latitude=="0"
@@ -69,9 +70,15 @@
 - 박물관 혹은 미술관에 없는 문화재를 표기하고자 했기에 삭제
 * 5 filtering_data.py -- filtering(df) -- making_filter() -- filter_info()에서 수행
 
+5. kind_df ⇒ "Kdcd" not in ["11", "12", "13"]
+- "11": 국보
+- "12": 보물
+- "13": 사적
+* 5 filtering_data.py -- filterinf(df) -- making_filter() -- filter_kind()에서 수행
 
-제거: 9907개
-나머지: 5095개
+
+제거: 13453개
+나머지: 1549개
 
 
 [수행하지 않은 조건]
