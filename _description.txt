@@ -1,0 +1,82 @@
+========== py 파일 ========== 
+[library 확인]
+* bs4, lxml, pandas
+* 없으면 pip로 설치
+
+[폴더 만들기]
+* ccbaLcto 폴더
+* data 폴더
+* data 폴더 안에 raw 폴더
+
+[번호 붙은 파일]
+* 번호 순서 대로 실행
+* 같은 번호 안에서는 실행 순서 상관 없음
+* 5번 실행 전에 utils_filter.py 파일을 51행[print(len(filter))] 주석 해제하고 실행해서 에러 여부 확인
+
+[함수 모음]
+- utils_basic.py (기본적인 함수와 변수)
+- utils_raw.py (raw data 만드는 함수)
+- utils_filter.py (필터링 조건을 만들고 수행하는 함수)
+
+
+========== ccbaLcto 폴더 ========== 
+* 1 ccbaLcto_code.py 실행 결과 저장
+* 시도별 시군구 코드 저장
+- ccbaLcto_{ccbaCtco}.csv 
+
+
+========== data 폴더 ========== 
+[DB 포함 X]
+- raw 폴더 안에 있는 파일
+- detail_request.csv
+
+[검색용]
+- period.csv
+- region.csv
+
+[검색 예비용]
+* 혹시나 해서 남겨둠
+- kind.csv
+- name.csv
+
+[marker 생성]
+- location.csv
+
+[문화재 정보]
+- info.csv
+
+
+========== 데이터 필터링 ========== 
+1. region_df ⇒ Lcto=="00"
+- Lcto: 시군구코드
+- "00": 해당 지역 전체 
+- 중복된 정보이므로 제외
+* 2 raw_csv_region.py에서 수행
+
+2. period_df ⇒  Pct1.isnull() or Pct1=="60"
+- Pct1: 시대코드
+- isnull(): 결측값
+- "60": 시대미상
+* 5 filtering_data.py -- filtering(df) -- making_filter() -- filter_location_period()에서 수행
+
+3. location_df ⇒ longitude=="0" or latitude=="0"
+- longitude: 경도, latitude: 위도
+- "0": 누락된 정보
+* 5 filtering_data.py -- filtering(df) -- making_filter() -- filter_location_period()에서 수행
+
+4. info_df ⇒ "박물관" in Lcad or "미술관" in Lcad
+- Lcad: 소재지 상세
+- 박물관 혹은 미술관에 없는 문화재를 표기하고자 했기에 삭제
+* 5 filtering_data.py -- filtering(df) -- making_filter() -- filter_info()에서 수행
+
+
+제거: 9907개
+나머지: 5095개
+
+
+[수행하지 않은 조건]
+1. region_df ⇒ Ctco.isnull()
+* 2번과 동일한 결과
+
+2. kind_df ⇒ Kdcd=="80"
+* 2번과 동일한 결과
