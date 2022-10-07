@@ -4,7 +4,7 @@ name_raw.csv
 - response: ccbaCpno(연계번호), ccbaMnm1(국문 문화재명)
 """
 
-from utils_raw import *
+from utils.crawling import *
 
 find_list = ["ccbaCpno", "ccbaMnm1"]
 add_list = []

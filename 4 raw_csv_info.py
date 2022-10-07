@@ -1,5 +1,5 @@
 """
-info.csv
+info_raw.csv
 - request: ccbaAsno(지정번호), ccbaKdcd(종목코드), ccbaCtcd(시도코드)
 - response: ccbaCpno(연계번호),
             ccmaName(문화재종목), crltsnoNm(지정호수), ccbaMnm1(국문 문화재명), ccbaMnm2(한문 문화재명),
@@ -8,14 +8,14 @@ info.csv
 결과창에서 url 뒤에 ERROR가 나오면 csv_info_2.py 실행
 """
 
-from utils_raw import *
+from utils.crawling import *
 
 find_list = ["ccmaName", "crltsnoNm", "ccbaMnm1", "ccbaMnm2",
              "imageUrl", "content",  "ccceName", "ccbaLcad",
              "ccbaAdmin", "ccbaPoss",  "ccbaAsdt"]
 # "ccbaCpno" 태그는 item 태그 밖에 있어서 find_list에 넣지 않음
 add_list = []
-detail_request_df = csv_to_dataframe("detail_request_raw.csv", "./data/raw/")
+detail_request_df = csv_to_df("detail_request_raw.csv", "./data/raw/")
 
 info_df = pd.DataFrame()
 for i in range(len(detail_request_df)):

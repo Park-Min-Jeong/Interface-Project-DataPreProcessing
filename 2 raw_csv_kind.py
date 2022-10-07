@@ -4,7 +4,7 @@ kind_raw.csv
 - response: ccbaCpno(연계번호)
 """
 
-from utils_raw import *
+from utils.crawling import *
 
 ccbaKdcd_list = [
     "11", "12", "13", "14", "15", "16", "17", "18",

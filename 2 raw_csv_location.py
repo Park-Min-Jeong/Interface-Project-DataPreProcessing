@@ -4,7 +4,7 @@ location_raw.csv
 - response: ccbaCpno(연계번호), longitude(경도), latitude(위도)
 """
 
-from utils_raw import *
+from utils.crawling import *
 
 find_list = ["ccbaCpno", "longitude", "latitude"]
 add_list = []

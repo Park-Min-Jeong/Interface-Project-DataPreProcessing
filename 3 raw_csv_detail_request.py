@@ -4,7 +4,7 @@ detail_request.csv
 - 상세정보 호출용: ccbaAsno(지정번호), ccbaKdcd(종목코드), ccbaCtcd(시도코드)
 """
 
-from utils_raw import *
+from utils.crawling import *
 
 find_list = ["ccbaAsno", "ccbaKdcd", "ccbaCtcd"]
 add_list = []

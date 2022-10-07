@@ -4,10 +4,10 @@ region_raw.csv
 - response: ccbaCpno(연계번호)
 """
 
-from utils_raw import *
+from utils.crawling import *
 
 ccbaCtcd_list = [
-    "11", "21", "22", "23", "24", "25", "26", "45",
+    "11", "21", "22", "23", "24", "25", "26",  # "45",
     "31", "32", "33", "34", "35", "36", "37", "38",
     "50"
 ]
@@ -17,7 +17,7 @@ add_list = ["ccbaCtcd", "ccbaLcto"]
 region_df = pd.DataFrame()
 
 for Ctcd in ccbaCtcd_list:
-    Lcto_df = pd.read_csv(f"./ccbaLcto/ccbaLcto_{Ctcd}.csv")
+    Lcto_df = csv_to_df(f"ccbaLcto_{Ctcd}.csv", ccbaLcto_path)
     for Lcto in Lcto_df.iloc[:, 0]:
         if Lcto == 0 or Lcto == "00":
             continue
