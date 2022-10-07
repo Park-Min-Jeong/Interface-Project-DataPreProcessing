@@ -60,9 +60,9 @@
 - 6 filtering_data.py -- filtering_df(df) -- making_filter() -- filter_location_period()에서 수행
 
 ### info_df
-- __"박물관" in Lcad or "미술관" in Lcad__
+- _["박물관", "미술관", "연구원", "대학교", "진흥원", "도서관"] not in Lcad_
   - Lcad: 소재지 상세
-- 박물관 혹은 미술관에 없는 문화재를 표기하고자 했기에 삭제
+- 박물관, 미술관, 연구원, 대학교, 진흥원, 도서관에는 많은 문화재가 모여 있기에 삭제
 - 6 filtering_data.py -- filtering_df(df) -- making_filter() -- filter_info()에서 수행
 
 ### kind_df
@@ -73,8 +73,8 @@
 -  6 filtering_data.py -- filtering_df(df) -- making_filter() -- filter_kind()에서 수행
 
 ### 결과
-- 제거: 13453개
-- 나머지: 1549개
+- 제거: 13557개
+- 나머지: 1445개
 
 
 ### 수행하지 않은 조건
