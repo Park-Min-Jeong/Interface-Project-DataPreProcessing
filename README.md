@@ -37,46 +37,44 @@
   - 시도별 시군구 코드 저장
 
 
-## 데이터 필터링
+## 데이터 클리닝
 ### region_df
-- __Lcto=="00"__
+- __Lcto=="00" 제거__
   - Lcto: 시군구코드
   - "00": 해당 지역 전체 
   - 중복된 정보이므로 제외
 - 2 raw_csv_region.py에서 수행
 
 ### period_df
-- __Pcd1.isnull() or Pcd1=="60" or Pcd1=="00"__
-  - Pct1: 시대코드
+- __Pcd1.isnull() or Pcd1=="60" or Pcd1=="00" 제거__
+  - Pcd1: 시대코드
   - isnull(): 결측값
   - "60": 시대미상
   - "00": 선사시대 이전
-  - 6 filtering_data.py -- filtering_df(df) -- making_filter() -- filter_location_period()에서 수행
+  - 6 cleaning_data.py -- filtering_df(df) -- making_filter() -- filter_location_period()에서 수행
+- __Pcd1=="01" or Pcd1=="10" 수정__
+  - Pcd1: 시대코드
+  - "01": 선사시대
+  - "10": 삼국시대
+  - 세부 시대로 변경
+  - 6 cleaning_data.py에서 수행
 
 ### location_df
-- __longitude=="0" or latitude=="0"__
+- __longitude=="0" or latitude=="0" 삭제__
   - longitude: 경도, latitude: 위도
   - "0": 누락된 정보
-  - 6 filtering_data.py -- filtering_df(df) -- making_filter() -- filter_location_period()에서 수행
-- __duplicated [longitude, latitude]__
+  - 6 cleaning_data.py -- filtering_df(df) -- making_filter() -- filter_location_period()에서 수행
+- __duplicated [longitude, latitude] 삭제__
   - 위도와 경도가 같은 장소에 있는 경우
-  - 6 filtering_data.py -- filtering_df(df) -- making_filter() -- filter_location()
+  - 6 cleaning_data.py -- filtering_df(df) -- making_filter() -- filter_location()
 
 ### kind_df
-- __"Kdcd" not in ["11", "12", "13"]__
+- __"Kdcd" not in ["11", "12", "13"] 삭제__
   - "11": 국보
   - "12": 보물
   - "13": 사적
-  -  6 filtering_data.py -- filtering_df(df) -- making_filter() -- filter_kind()에서 수행
+  -  6 cleaning_data.py -- filtering_df(df) -- making_filter() -- filter_kind()에서 수행
 
 ### 결과
 - 제거: 13674개
 - 나머지: 1328개
-
-
-### 수행하지 않은 조건
-1. region_df ⇒ Ctco.isnull()
-   * 2번과 동일한 결과
-
-2. kind_df ⇒ Kdcd=="80"
-   * 2번과 동일한 결과
