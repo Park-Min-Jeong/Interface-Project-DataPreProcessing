@@ -17,18 +17,10 @@ def filter_location_period():
     return location_period[condition][PK]
 
 
-def filter_info():
-    info = csv_to_df("info_raw.csv", csv_raw_path)
-    result = pd.DataFrame(columns=info.columns)
-    remove_Lcad = ["박물관", "미술관", "연구원", "대학교", "진흥원", "도서관"]
-    for i in range(len(info)):
-        row = info.loc[i, :]
-
-        if type(row["ccbaLcad_item"])==str:
-            if any(Lcad in row["ccbaLcad_item"] for Lcad in remove_Lcad):
-                result = pd.concat([result, pd.DataFrame([row], columns=info.columns)], ignore_index=True)
-
-    return result[PK]
+def filter_location():
+    location = csv_to_df("location_raw.csv", csv_raw_path)
+    condition = location[["longitude_item", "latitude_item"]].duplicated(keep=False)
+    return location[condition][PK]
 
 
 def filter_kind():
@@ -46,7 +38,7 @@ def filter_kind():
 
 def making_filter():
     filter1 = filter_location_period()
-    filter2 = filter_info()
+    filter2 = filter_location()
     filter3 = filter_kind()
     filter_df = pd.concat([filter1, filter2], ignore_index=True)
     filter_df = pd.concat([filter_df, filter3], ignore_index=True)
@@ -66,5 +58,4 @@ def filtering_df(df, filter):
     return df
 
 filter = making_filter()
-# csv_raw_path = "../data/raw/"
 # print(len(filter))

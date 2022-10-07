@@ -51,30 +51,27 @@
   - isnull(): 결측값
   - "60": 시대미상
   - "00": 선사시대 이전
-- 6 filtering_data.py -- filtering_df(df) -- making_filter() -- filter_location_period()에서 수행
+  - 6 filtering_data.py -- filtering_df(df) -- making_filter() -- filter_location_period()에서 수행
 
 ### location_df
 - __longitude=="0" or latitude=="0"__
   - longitude: 경도, latitude: 위도
   - "0": 누락된 정보
-- 6 filtering_data.py -- filtering_df(df) -- making_filter() -- filter_location_period()에서 수행
-
-### info_df
-- _["박물관", "미술관", "연구원", "대학교", "진흥원", "도서관"] not in Lcad_
-  - Lcad: 소재지 상세
-- 박물관, 미술관, 연구원, 대학교, 진흥원, 도서관에는 많은 문화재가 모여 있기에 삭제
-- 6 filtering_data.py -- filtering_df(df) -- making_filter() -- filter_info()에서 수행
+  - 6 filtering_data.py -- filtering_df(df) -- making_filter() -- filter_location_period()에서 수행
+- __duplicated [longitude, latitude]__
+  - 위도와 경도가 같은 장소에 있는 경우
+  - 6 filtering_data.py -- filtering_df(df) -- making_filter() -- filter_location()
 
 ### kind_df
 - __"Kdcd" not in ["11", "12", "13"]__
   - "11": 국보
   - "12": 보물
   - "13": 사적
--  6 filtering_data.py -- filtering_df(df) -- making_filter() -- filter_kind()에서 수행
+  -  6 filtering_data.py -- filtering_df(df) -- making_filter() -- filter_kind()에서 수행
 
 ### 결과
-- 제거: 13557개
-- 나머지: 1445개
+- 제거: 13674개
+- 나머지: 1328개
 
 
 ### 수행하지 않은 조건
