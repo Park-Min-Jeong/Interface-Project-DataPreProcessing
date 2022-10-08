@@ -30,8 +30,8 @@ def csv_to_df(name, path="./data/"):
     return df
 
 
-def merge_df(df1, df2):
-    return pd.merge(left=df1, right=df2, on=PK, how="outer")
+def merge_df(df1, df2, condition=PK):
+    return pd.merge(left=df1, right=df2, on=condition, how="outer")
 
 
 def save_df(df, name, path="./data/"):

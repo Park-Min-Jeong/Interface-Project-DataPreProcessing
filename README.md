@@ -38,42 +38,43 @@
 
 
 ## 데이터 클리닝
-### region_df
+### ccbaLcto: 시군구코드
 - __Lcto=="00" 제거__
-  - Lcto: 시군구코드
   - "00": 해당 지역 전체 
   - 중복된 정보이므로 제외
-- 2 raw_csv_region.py에서 수행
+  - 2 raw_csv_region.py에서 수행
 
-### period_df
+### ccbaPcd1: 시대코드
 - __Pcd1.isnull() or Pcd1=="60" or Pcd1=="00" 제거__
-  - Pcd1: 시대코드
   - isnull(): 결측값
   - "60": 시대미상
   - "00": 선사시대 이전
-  - 6 cleaning_data.py -- filtering_df(df) -- making_filter() -- filter_location_period()에서 수행
+  - 6 cleaning_data.py > filtering_df(df) > making_filter() > filter_location_period()에서 수행
 - __Pcd1=="01" or Pcd1=="10" 수정__
-  - Pcd1: 시대코드
   - "01": 선사시대
   - "10": 삼국시대
   - 세부 시대로 변경
-  - 6 cleaning_data.py에서 수행
+  - 6 cleaning_data.py > modifying_df(df) > modifying_Pcd1(df)에서 수행
 
-### location_df
+### longitude & latitude: 경도 & 위도
 - __longitude=="0" or latitude=="0" 삭제__
-  - longitude: 경도, latitude: 위도
   - "0": 누락된 정보
-  - 6 cleaning_data.py -- filtering_df(df) -- making_filter() -- filter_location_period()에서 수행
+  - 6 cleaning_data.py > filtering_df(df) > making_filter() > filter_location_period()에서 수행
 - __duplicated [longitude, latitude] 삭제__
-  - 위도와 경도가 같은 장소에 있는 경우
-  - 6 cleaning_data.py -- filtering_df(df) -- making_filter() -- filter_location()
+  - 위도와 경도가 같은 데이터 삭제
+  - 6 cleaning_data.py > filtering_df(df) > making_filter() > filter_location()
 
-### kind_df
+### ccbaKdcd: 분류코드
 - __"Kdcd" not in ["11", "12", "13"] 삭제__
   - "11": 국보
   - "12": 보물
   - "13": 사적
-  -  6 cleaning_data.py -- filtering_df(df) -- making_filter() -- filter_kind()에서 수행
+  -  6 cleaning_data.py > filtering_df(df) > making_filter() > filter_kind()에서 수행
+
+### ccbaAsdt: 지정/등록일
+- __pd.to_datetime("ccbaAsdt").dt.date__
+  - 데이터타입 변경
+  - 예시: 20221008 > 2022-10-08
 
 ### 결과
 - 제거: 13674개
